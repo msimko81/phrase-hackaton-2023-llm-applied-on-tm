@@ -9,4 +9,4 @@ management:
 
 # Open AI
 open-ai:
-  api-key: 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
+  api-key: ${OPENAI_SECRET_API_KEY}

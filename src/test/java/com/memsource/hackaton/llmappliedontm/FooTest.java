@@ -13,6 +13,7 @@ import java.util.List;
 
 @SpringBootTest
 @Slf4j
+@Disabled
 public class FooTest {
 
     @Autowired

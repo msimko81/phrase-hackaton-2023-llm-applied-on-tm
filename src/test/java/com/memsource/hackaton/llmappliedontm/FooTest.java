@@ -4,6 +4,7 @@ import com.theokanning.openai.completion.CompletionRequest;
 import com.theokanning.openai.model.Model;
 import com.theokanning.openai.service.OpenAiService;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @SpringBootTest
 @Slf4j
+@Disabled
 public class FooTest {
 
     @Autowired

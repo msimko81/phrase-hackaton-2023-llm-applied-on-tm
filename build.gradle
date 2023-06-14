@@ -1,23 +1,50 @@
-plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.0.1'
-	id 'io.spring.dependency-management' version '1.1.0'
+buildscript {
+    ext {
+        springBootVersion = '3.1.0'
+        lombokVersion = '1.18.28'
+        theokanningOpenAiVersion = '0.12.0'
+    }
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+plugins {
+    id 'idea'
+    id 'java'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.springframework.boot' version "${springBootVersion}"
+}
+
+group = 'com.memsource.hackaton.llmappliedontm'
+version = '1.0.0-SNAPSHOT'
 sourceCompatibility = '17'
+targetCompatibility = 17
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation('org.springframework.boot:spring-boot-starter-actuator')
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    implementation "com.theokanning.openai-gpt3-java:service:${theokanningOpenAiVersion}"
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        showStandardStreams = true
+        showCauses true
+        exceptionFormat 'full'
+    }
 }

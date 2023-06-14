@@ -1,0 +1,12 @@
+spring.application.name: phrase-hackathon-llm-tm
+
+server.port: 8080
+
+# Actuator
+management:
+  endpoints.web.exposure.include: "*"
+  endpoint.health.probes.enabled: true
+
+# Open AI
+open-ai:
+  api-key: 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

@@ -42,6 +42,10 @@ dependencies {
 test {
     useJUnitPlatform()
 
+    if (project.hasProperty('springProfiles')) {
+        systemProperty 'spring.profiles.active', "${springProfiles}"
+    }
+
     testLogging {
         showStandardStreams = true
         showCauses true

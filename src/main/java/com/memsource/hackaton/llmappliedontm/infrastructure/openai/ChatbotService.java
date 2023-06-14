@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ChatbotService {
 
-    public Dataset vaporiseDataset(String prompt, Dataset dataset) {
+    public Dataset vaporiseDataset(String prompt, String datasetId) {
         return null;
     }
 

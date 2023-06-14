@@ -46,7 +46,7 @@ jobs:
           distribution: ${{ env.DISTRIBUTION }}
           cache: 'maven'
 
-      - name: Build with Maven
+      - name: Build with Gradle
         run: ./gradlew build
 
       - name: Upload artifact for deployment job

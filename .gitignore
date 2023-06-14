@@ -33,3 +33,6 @@ README.html
 
 # AZD files
 .azure
+
+# local properties
+application-local.yml

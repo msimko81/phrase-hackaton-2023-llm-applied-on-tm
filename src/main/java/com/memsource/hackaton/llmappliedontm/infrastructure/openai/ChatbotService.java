@@ -49,8 +49,8 @@ public class ChatbotService {
                 continue;
             }
             Segment segment = Segment.builder()
-                    .source(parts[0])
-                    .target(parts[1])
+                    .source(parts[0].replaceFirst("-", "").stripIndent().stripTrailing())
+                    .target(parts[1].replaceFirst("-", "").stripIndent().stripTrailing())
                     .build();
             segments.add(segment);
         }

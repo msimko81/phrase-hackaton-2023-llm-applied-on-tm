@@ -2,17 +2,13 @@ package com.memsource.hackaton.llmappliedontm;
 
 import com.memsource.hackaton.llmappliedontm.domain.dataset.entity.Dataset;
 import com.memsource.hackaton.llmappliedontm.infrastructure.openai.ChatbotService;
-import com.theokanning.openai.completion.CompletionRequest;
-import com.theokanning.openai.model.Model;
-import com.theokanning.openai.service.OpenAiService;
-import com.memsource.hackaton.llmappliedontm.infrastructure.openai.OpenAiProxy;
+import com.memsource.hackaton.llmappliedontm.infrastructure.openai.OpenAiClient;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @SpringBootTest
@@ -21,7 +17,7 @@ import java.util.stream.Collectors;
 public class FooTest {
 
     @Autowired
-    OpenAiProxy openAiProxy;
+    OpenAiClient openAiClient;
     @Autowired
     private ChatbotService chatbotService;
 
@@ -35,7 +31,7 @@ public class FooTest {
                 - His mother and father lives abroad.|Jeho matka a otec žijú v zahraničí.
                                         """;
 
-        System.out.println(openAiProxy.requestCompletion(prompt));
+        System.out.println(openAiClient.callChatbot(prompt, "text-davinci-003"));
     }
 
     @Test

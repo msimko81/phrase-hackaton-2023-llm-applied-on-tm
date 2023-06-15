@@ -18,13 +18,13 @@ public class DatasetService {
         return datasetRepository.findById(id);
     }
 
-    public List<DatasetValueTitleResponse> getAllDatasetIdsAndNames() {
+    public List<DatasetIdNameResponse> getAllDatasetIdsAndNames() {
         return datasetRepository.getAllIdsWithNames()
                 .entrySet()
                 .stream()
-                .map(entry -> DatasetValueTitleResponse.builder()
-                        .value(entry.getKey())
-                        .title(entry.getValue())
+                .map(entry -> DatasetIdNameResponse.builder()
+                        .id(entry.getKey())
+                        .name(entry.getValue())
                         .build())
                 .toList();
     }

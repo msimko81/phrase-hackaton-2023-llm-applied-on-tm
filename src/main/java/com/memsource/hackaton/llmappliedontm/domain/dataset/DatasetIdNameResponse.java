@@ -5,10 +5,10 @@ import lombok.Data;
 
 @Data
 @Builder
-public class DatasetValueTitleResponse {
+public class DatasetIdNameResponse {
 
-    String value;
+    String id;
 
-    String title;
+    String name;
 
 }

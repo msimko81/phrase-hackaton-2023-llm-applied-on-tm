@@ -26,13 +26,13 @@ class DatasetServiceTest {
     void returnsValueAndTitleObjectForEveryDataset() {
         when(datasetRepository.getAllIdsWithNames()).thenReturn(Map.of("dataset1", "dataset name"));
 
-        List<DatasetValueTitleResponse> result = sut.getAllDatasetIdsAndNames();
+        List<DatasetIdNameResponse> result = sut.getAllDatasetIdsAndNames();
 
         assertNotNull(result);
         assertEquals(1, result.size());
-        DatasetValueTitleResponse firstResponse = result.get(0);
-        assertEquals("dataset1", firstResponse.getValue());
-        assertEquals("dataset name", firstResponse.getTitle());
+        DatasetIdNameResponse firstResponse = result.get(0);
+        assertEquals("dataset1", firstResponse.getId());
+        assertEquals("dataset name", firstResponse.getName());
     }
 
 }

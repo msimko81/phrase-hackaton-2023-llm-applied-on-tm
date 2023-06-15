@@ -2,7 +2,7 @@ package com.memsource.hackaton.llmappliedontm.dataset;
 
 import com.memsource.hackaton.llmappliedontm.dataset.request.VaporiseRequest;
 import com.memsource.hackaton.llmappliedontm.domain.dataset.DatasetService;
-import com.memsource.hackaton.llmappliedontm.domain.dataset.DatasetValueTitleResponse;
+import com.memsource.hackaton.llmappliedontm.domain.dataset.DatasetIdNameResponse;
 import com.memsource.hackaton.llmappliedontm.domain.dataset.entity.Dataset;
 import com.memsource.hackaton.llmappliedontm.infrastructure.openai.ChatbotService;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ class DatasetController {
     private final DatasetService datasetService;
 
     @GetMapping
-    List<DatasetValueTitleResponse> getDatasets() {
+    List<DatasetIdNameResponse> getDatasets() {
         return datasetService.getAllDatasetIdsAndNames();
     }
 

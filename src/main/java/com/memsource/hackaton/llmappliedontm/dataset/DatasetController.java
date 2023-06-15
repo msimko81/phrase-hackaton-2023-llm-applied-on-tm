@@ -39,6 +39,6 @@ class DatasetController {
     Dataset vaporiseDataset(@RequestBody VaporiseRequest request,
             @RequestParam(value = "model", required = false, defaultValue = "text-davinci-002") String model,
             @RequestParam(value = "promptFormatNumber", required = false, defaultValue = "2") int promptFormatNumber) {
-        return chatbotService.vaporiseDataset(request.getPrompt(), request.getDatasetId(), model, promptFormatNumber);
+        return chatbotService.vaporiseDataset(request.getPromptType(), request.getDatasetId(), model, promptFormatNumber);
     }
 }

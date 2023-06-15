@@ -191,8 +191,8 @@ public class Database {
         result.put("dataset4", Dataset.builder()
                 .id("dataset4")
                 .name("Propagate changes")
-                .sourceLanguage("en")
-                .targetLanguage("sk")
+                .sourceLanguage("sk")
+                .targetLanguage("en")
                 .segments(
                         List.of(
                                 Dataset.Segment.builder()
@@ -202,15 +202,39 @@ public class Database {
                                 Dataset.Segment.builder()
                                         .source("Pre podobné a komplikovanejšie úlohy bude potrebné rozšíriť programátorský tím o špecialistov na AI/ML, ktorí majú prehľad o rôznych technológiách, vrátane LLM.")
                                         .target("For similar and more complicated tasks, it will be necessary to expand the programming team with AI/ML specialists who have an overview of various technologies, including LLM.")
-                                        .build()/*,
-                                Dataset.Segment.builder()
-                                        .source("Programátorský tím")
-                                        .target("The programming team")
                                         .build(),
                                 Dataset.Segment.builder()
-                                        .source("LLM")
-                                        .target("LLM")
-                                        .build()*/
+                                        .source("Veta nesúvisiaca s programovaním")
+                                        .target("A sentence not related to programming")
+                                        .build(),
+                                Dataset.Segment.builder()
+                                        .source("Firma zamestnáva ľudí zaoberajúcimi sa rôznymi oblasťami")
+                                        .target("The company employs people dealing with various fields")
+                                        .build(),
+                                Dataset.Segment.builder()
+                                        .source("Včera bolo slnečno, predvčerom prešla ponad jizerky búrka")
+                                        .target("Yesterday was sunny, the day before yesterday a storm passed over the Jizera mountains")
+                                        .build(),
+                                Dataset.Segment.builder()
+                                        .source("Najbližší sprint nám v tíme budú chýbať dvaja programátori")
+                                        .target("The next sprint, we will be missing two programmers in the team")
+                                        .build(),
+                                Dataset.Segment.builder()
+                                        .source("Už neviem, čo by som sem napísal")
+                                        .target("I don't know what to write here")
+                                        .build(),
+                                Dataset.Segment.builder()
+                                        .source("Oblasť LLM sa začala intenzívne študovať")
+                                        .target("The field of LLM has begun to be intensively studied")
+                                        .build(),
+                                Dataset.Segment.builder()
+                                        .source("Výrobcovia nábytku majú v niečom podobnú prácu dodávateľom software.")
+                                        .target("Furniture manufacturers have a somewhat similar job to software suppliers.")
+                                        .build(),
+                                Dataset.Segment.builder()
+                                        .source("Najprv zozbierajú požiadavky zákazníka, potom ich pretavia do prezentovaného modelu a nakoniec pripravia výrobok.")
+                                        .target("First, they collect the customer's requirements, then transform them into the presented model, and finally prepare the product.")
+                                        .build()
                         )
                 )
                 .build());

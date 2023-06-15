@@ -80,9 +80,13 @@ public class ChatbotService {
                     {3}
                     """;
             case 3 -> """
-                    {0} The following text contains blocks with {1} sentence and its {2} translation (divided by the pipe). Each such block starts with a new line and a dash.
-                    Replace the {1} sentence in the first block by the following text `{3}'.
-                    Apply the same modification pattern (and only this modification) that was used in the transformation of the first sentence to all the remaining blocks, including all translations. Return all blocks.
+                    The following text contains blocks with {1} sentence and its {2} translation (divided by the pipe). Each such block starts with a new line and a dash.
+                    Replace the {1} sentence in the first block by the following text ''{0}''.
+                    Apply the same modification pattern (and only this modification) that was used in the transformation of the first sentence to all the remaining blocks, including all translations.
+                    If the translation is missing, use Google Translate result instead.
+                    Return all blocks.
+
+                    {3}
                     """;
             default -> """
                     {0} The following text contains Original {1} sentence and {2} translation.
@@ -103,7 +107,7 @@ public class ChatbotService {
 
     private static String getSegmentsFormat(int promptFormatNumber) {
         return switch (promptFormatNumber) {
-            case 2 -> "- %s | %s";
+            case 2,3 -> "- %s | %s";
             default -> "%s | %s";
         };
     }

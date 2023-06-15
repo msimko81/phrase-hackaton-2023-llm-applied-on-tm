@@ -69,16 +69,14 @@ public class ChatbotService {
     private String getPromptFormat(int number) {
         return switch (number) {
             case 1 -> """
-                        %s The text contains %s sentence followed by %s translation.
+                    %s The text contains %s sentence followed by %s translation.
                     Each such block is divided by a new line. Rewrite both parts using the respective language.
                                         
                     %s
                     """;
             case 2 -> """
-                        %s The text contains %s sentence followed by %s translation (divided by the pipe).
-                         Each such block starts with a new line with a dash. Rewrite both parts using the respective language.
-                          
-                          %s
+                    %s The text contains %s sentence followed by %s translation (divided by the pipe). Each such block starts with a new line with a dash. Rewrite both parts using the respective language.
+                    %s
                     """;
             default -> """
                     %s The following text contains Original %s sentence and %s translation.

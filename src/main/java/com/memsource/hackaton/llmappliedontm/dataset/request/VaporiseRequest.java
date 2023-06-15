@@ -7,6 +7,6 @@ public class VaporiseRequest {
 
     String datasetId;
 
-    String prompt;
+    String promptType;
 
 }

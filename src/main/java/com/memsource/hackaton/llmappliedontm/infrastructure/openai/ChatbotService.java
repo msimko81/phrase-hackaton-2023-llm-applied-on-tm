@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -63,27 +64,32 @@ public class ChatbotService {
 
         String sourceLanguage = getLanguageLongForm(dataset.getSourceLanguage());
         String targetLanguage = getLanguageLongForm(dataset.getTargetLanguage());
-        return String.format(promptFormat, promptType, sourceLanguage, targetLanguage, segments);
+        return MessageFormat.format(promptFormat, promptType, sourceLanguage, targetLanguage, segments);
     }
 
     private String getPromptFormat(int number) {
         return switch (number) {
             case 1 -> """
-                    %s The text contains %s sentence followed by %s translation.
+                    {0} The text contains {1} sentence followed by {2} translation.
                     Each such block is divided by a new line. Rewrite both parts using the respective language.
                                         
-                    %s
+                    {3}
                     """;
             case 2 -> """
-                    %s The text contains %s sentence followed by %s translation (divided by the pipe). Each such block starts with a new line with a dash. Rewrite both parts using the respective language.
-                    %s
+                    {0} The text contains {1} sentence followed by {2} translation (divided by the pipe). Each such block starts with a new line with a dash. Rewrite both parts using the respective language.
+                    {3}
+                    """;
+            case 3 -> """
+                    {0} The following text contains blocks with {1} sentence and its {2} translation (divided by the pipe). Each such block starts with a new line and a dash.
+                    Replace the {1} sentence in the first block by the following text `{3}'.
+                    Apply the same modification pattern (and only this modification) that was used in the transformation of the first sentence to all the remaining blocks, including all translations. Return all blocks.
                     """;
             default -> """
-                    %s The following text contains Original %s sentence and %s translation.
+                    {0} The following text contains Original {1} sentence and {2} translation.
                     The original sentence and the translation are separated by the pipe. Each block of text is separated by a new line.
                     The sentence should be rewritten in the same language as the original and its meaning should be preserved.
                                         
-                    %s
+                    {3}
                     """;
         };
     }

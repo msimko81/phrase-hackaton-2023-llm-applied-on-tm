@@ -46,7 +46,7 @@ class ChatbotServiceTest {
         doReturn("new sentence for source|new sentence for target").when(openAiClient).callChatbot(any(), any());
 
         Dataset vaporiseDataset = chatbotService.vaporiseDataset("prompt", "datasetId", "text-davinci-003",
-                3);
+                4);
 
         assertThat(vaporiseDataset.getName()).isEqualTo(dataset.getName());
         assertThat(vaporiseDataset.getId()).isEqualTo(dataset.getId());

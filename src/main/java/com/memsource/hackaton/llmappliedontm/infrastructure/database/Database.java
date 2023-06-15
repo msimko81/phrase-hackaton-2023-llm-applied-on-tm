@@ -23,6 +23,7 @@ public class Database {
         addEnglishToSlovakDataset(result);
         addEnglishToPolishDataset(result);
         addEnglishToGermanDataset(result);
+        addEnglishToSlovakDatasetWithLongSentences(result);
 
         return result;
     }
@@ -186,4 +187,32 @@ public class Database {
                 .build());
     }
 
+    private static void addEnglishToSlovakDatasetWithLongSentences(Map<String, Dataset> result) {
+        result.put("dataset4", Dataset.builder()
+                .id("dataset4")
+                .name("Propagate changes")
+                .sourceLanguage("en")
+                .targetLanguage("sk")
+                .segments(
+                        List.of(
+                                Dataset.Segment.builder()
+                                        .source("Programátorský tím sa venoval práci na LLM a vyriešil úlohu propagácie nejakej konverzie textu do ďalšieho textu.")
+                                        .target("The programming team worked on the LLM and solved the task of promoting some text-to-text conversion.")
+                                        .build(),
+                                Dataset.Segment.builder()
+                                        .source("Pre podobné a komplikovanejšie úlohy bude potrebné rozšíriť programátorský tím o špecialistov na AI/ML, ktorí majú prehľad o rôznych technológiách, vrátane LLM.")
+                                        .target("For similar and more complicated tasks, it will be necessary to expand the programming team with AI/ML specialists who have an overview of various technologies, including LLM.")
+                                        .build()/*,
+                                Dataset.Segment.builder()
+                                        .source("Programátorský tím")
+                                        .target("The programming team")
+                                        .build(),
+                                Dataset.Segment.builder()
+                                        .source("LLM")
+                                        .target("LLM")
+                                        .build()*/
+                        )
+                )
+                .build());
+    }
 }

@@ -2,6 +2,7 @@ package com.memsource.hackaton.llmappliedontm.dataset;
 
 import com.memsource.hackaton.llmappliedontm.dataset.request.VaporiseRequest;
 import com.memsource.hackaton.llmappliedontm.domain.dataset.DatasetService;
+import com.memsource.hackaton.llmappliedontm.domain.dataset.DatasetValueTitleResponse;
 import com.memsource.hackaton.llmappliedontm.domain.dataset.entity.Dataset;
 import com.memsource.hackaton.llmappliedontm.infrastructure.openai.ChatbotService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/datasets")
@@ -24,7 +25,7 @@ class DatasetController {
     private final DatasetService datasetService;
 
     @GetMapping
-    Map<String, String> getDatasets() {
+    List<DatasetValueTitleResponse> getDatasets() {
         return datasetService.getAllDatasetIdsAndNames();
     }
 

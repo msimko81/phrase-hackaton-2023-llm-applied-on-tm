@@ -1,6 +1,7 @@
 package com.memsource.hackaton.llmappliedontm.dataset;
 
 import com.memsource.hackaton.llmappliedontm.domain.dataset.DatasetService;
+import com.memsource.hackaton.llmappliedontm.domain.dataset.DatasetValueTitleResponse;
 import com.memsource.hackaton.llmappliedontm.domain.dataset.entity.Dataset;
 import com.memsource.hackaton.llmappliedontm.infrastructure.openai.ChatbotService;
 import org.junit.jupiter.api.Test;
@@ -35,14 +36,19 @@ class DatasetControllerTest {
     @Test
     void returnsIdNamePairsForDatasetOverview() throws Exception {
         when(datasetService.getAllDatasetIdsAndNames()).thenReturn(
-                Map.of("dataset1", "best dataset", "dataset2", "worst dataset")
+                List.of(
+                        DatasetValueTitleResponse.builder().value("dataset 1").title("best dataset").build(),
+                        DatasetValueTitleResponse.builder().value("dataset 2").title("worst dataset").build()
+                )
         );
 
         mockMvc.perform(get("/api/v1/datasets"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()").value(2))
-                .andExpect(jsonPath("$.dataset1").value("best dataset"))
-                .andExpect(jsonPath("$.dataset2").value("worst dataset"));
+                .andExpect(jsonPath("$[0].value").value("dataset 1"))
+                .andExpect(jsonPath("$[0].title").value("best dataset"))
+                .andExpect(jsonPath("$[1].value").value("dataset 2"))
+                .andExpect(jsonPath("$[1].title").value("worst dataset"));
     }
 
     @Test

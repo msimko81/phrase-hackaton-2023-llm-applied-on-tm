@@ -7,7 +7,7 @@ import lombok.Data;
 
 import java.util.List;
 
-@Builder(access = AccessLevel.PUBLIC)
+@Builder(access = AccessLevel.PUBLIC, toBuilder=true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Data
 public class Dataset {

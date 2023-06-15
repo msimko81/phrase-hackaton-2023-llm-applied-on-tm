@@ -12,7 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -64,7 +63,7 @@ class DatasetControllerTest {
 
     @Test
     void returnsVaporisedDatasetAfterApplyingPrompt() throws Exception {
-        when(chatbotService.vaporiseDataset(any(), any())).thenReturn(
+        when(chatbotService.vaporiseDataset(any(), any(), "text-davinci-003", 1)).thenReturn(
                 Dataset.builder()
                         .name("vaporised dataset")
                         .segments(

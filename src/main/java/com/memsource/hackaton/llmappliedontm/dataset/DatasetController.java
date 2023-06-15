@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -35,8 +36,9 @@ class DatasetController {
     }
 
     @PostMapping("/vaporise")
-    Dataset vaporiseDataset(@RequestBody VaporiseRequest request) {
-        return chatbotService.vaporiseDataset(request.getPrompt(), request.getDatasetId());
+    Dataset vaporiseDataset(@RequestBody VaporiseRequest request,
+            @RequestParam(value = "model", required = false, defaultValue = "text-davinci-002") String model,
+            @RequestParam(value = "promptFormatNumber", required = false, defaultValue = "2") int promptFormatNumber) {
+        return chatbotService.vaporiseDataset(request.getPrompt(), request.getDatasetId(), model, promptFormatNumber);
     }
-
 }

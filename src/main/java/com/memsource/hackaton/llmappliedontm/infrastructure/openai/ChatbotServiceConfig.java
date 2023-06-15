@@ -18,7 +18,6 @@ import org.springframework.context.annotation.Configuration;
 @Builder
 public class ChatbotServiceConfig {
 
-    private String model;
     private Integer maxTokens;
 
     @Default

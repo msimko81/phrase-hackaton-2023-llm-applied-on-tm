@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,8 +50,8 @@ public class ChatbotService {
                 continue;
             }
             Segment segment = Segment.builder()
-                    .source(parts[0])
-                    .target(parts[1])
+                    .source(parts[0].replaceFirst("-", "").stripIndent().stripTrailing())
+                    .target(parts[1].replaceFirst("-", "").stripIndent().stripTrailing())
                     .build();
             segments.add(segment);
         }

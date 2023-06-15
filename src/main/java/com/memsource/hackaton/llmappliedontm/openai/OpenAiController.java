@@ -4,6 +4,7 @@ import com.memsource.hackaton.llmappliedontm.infrastructure.openai.ChatbotServic
 import com.memsource.hackaton.llmappliedontm.infrastructure.openai.OpenAiClient;
 import com.theokanning.openai.service.OpenAiService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/openai")
 @RequiredArgsConstructor
+@CrossOrigin
 class OpenAiController {
 
     private final OpenAiClient openAiClient;

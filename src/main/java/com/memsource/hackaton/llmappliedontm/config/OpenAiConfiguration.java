@@ -1,8 +1,6 @@
 package com.memsource.hackaton.llmappliedontm.config;
 
 import com.theokanning.openai.service.OpenAiService;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

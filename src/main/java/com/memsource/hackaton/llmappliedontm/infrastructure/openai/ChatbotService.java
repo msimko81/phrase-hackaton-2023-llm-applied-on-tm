@@ -22,7 +22,8 @@ public class ChatbotService {
     private final DatasetRepository datasetRepository;
     private final OpenAiClient openAiClient;
 
-    public Dataset vaporiseDataset(String prompt, String datasetId, String model, int promptFormatNumber) {
+    public Dataset vaporiseDataset(String prompt, String datasetId, String model,
+            int promptFormatNumber) {
         Dataset dataset = datasetRepository.findById(datasetId);
         String finalPrompt = formatPrompt(prompt, dataset, promptFormatNumber);
 
@@ -58,7 +59,7 @@ public class ChatbotService {
 
     private String formatPrompt(String prompt, Dataset dataset, int promptFormatNumber) {
         String promptFormat = getPromptFormat(promptFormatNumber);
-        String segments = formatSegments(dataset);
+        String segments = formatSegments(dataset, promptFormatNumber);
 
         String sourceLanguage = getLanguageLongForm(dataset.getSourceLanguage());
         String targetLanguage = getLanguageLongForm(dataset.getTargetLanguage());
@@ -68,26 +69,39 @@ public class ChatbotService {
     private String getPromptFormat(int number) {
         return switch (number) {
             case 1 -> """
-                    %s. The text contains %s sentence followed by %s translation.
-                Each such block is divided by a new line. Rewrite both parts using the respective language.
-                                    
-                %s
-                """;
+                        %s The text contains %s sentence followed by %s translation.
+                    Each such block is divided by a new line. Rewrite both parts using the respective language.
+                                        
+                    %s
+                    """;
+            case 2 -> """
+                        %s The text contains %s sentence followed by %s translation (divided by the pipe).
+                         Each such block starts with a new line with a dash. Rewrite both parts using the respective language.
+                          
+                          %s
+                    """;
             default -> """
-                %s. The following text contains Original %s sentence and %s translation.
-                The original sentence and the translation are separated by the pipe. Each block of text is separated by a new line.
-                The sentence should be rewritten in the same language as the original and its meaning should be preserved.
-                                    
-                %s
-                """;
+                    %s The following text contains Original %s sentence and %s translation.
+                    The original sentence and the translation are separated by the pipe. Each block of text is separated by a new line.
+                    The sentence should be rewritten in the same language as the original and its meaning should be preserved.
+                                        
+                    %s
+                    """;
         };
     }
 
-    private static String formatSegments(Dataset dataset) {
+    private static String formatSegments(Dataset dataset, int promptFormatNumber) {
         return dataset.getSegments()
                 .stream()
-                .map(segment -> String.format("%s|%s", segment.getSource(), segment.getTarget()))
+                .map(segment -> String.format(getSegmentsFormat(promptFormatNumber), segment.getSource(), segment.getTarget()))
                 .collect(Collectors.joining("\n"));
+    }
+
+    private static String getSegmentsFormat(int promptFormatNumber) {
+        return switch (promptFormatNumber) {
+            case 2 -> "- %s | %s";
+            default -> "%s | %s";
+        };
     }
 
     private String getLanguageLongForm(String languageShort) {

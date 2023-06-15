@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @SpringBootTest
 @Slf4j
-@Disabled
+//@Disabled
 public class FooTest {
 
     @Autowired
@@ -42,14 +42,19 @@ public class FooTest {
     void prompts() {
         Dataset vaporiseDataset =
                 chatbotService.vaporiseDataset("Rewrite the following in a gender neutral way.", "dataset1",
-                        "text-davinci-003",
+                        "text-davinci-002",
                         1);
         Dataset vaporiseDataset2 =
                 chatbotService.vaporiseDataset("Rewrite the following in a gender neutral way.", "dataset1",
-                        "text-davinci-003",
+                        "text-davinci-002",
                         2);
+        Dataset vaporiseDataset3 =
+                chatbotService.vaporiseDataset("Rewrite the following in a gender neutral way.", "dataset1",
+                        "text-davinci-002",
+                        3);
         printSegments(vaporiseDataset);
         printSegments(vaporiseDataset2);
+        printSegments(vaporiseDataset3);
     }
 
     private void printSegments(Dataset dataset) {
@@ -57,5 +62,6 @@ public class FooTest {
                 .stream()
                 .map(s -> s.getSource() + " -> " + s.getTarget())
                 .collect(Collectors.joining("\n")));
+        System.out.println("====================================");
     }
 }

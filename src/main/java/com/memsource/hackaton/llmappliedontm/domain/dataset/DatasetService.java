@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -18,8 +18,15 @@ public class DatasetService {
         return datasetRepository.findById(id);
     }
 
-    public Map<String, String> getAllDatasetIdsAndNames() {
-        return datasetRepository.getAllIdsWithNames();
+    public List<DatasetValueTitleResponse> getAllDatasetIdsAndNames() {
+        return datasetRepository.getAllIdsWithNames()
+                .entrySet()
+                .stream()
+                .map(entry -> DatasetValueTitleResponse.builder()
+                        .value(entry.getKey())
+                        .title(entry.getValue())
+                        .build())
+                .toList();
     }
 
 }

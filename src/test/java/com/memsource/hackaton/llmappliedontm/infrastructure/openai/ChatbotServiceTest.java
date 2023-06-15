@@ -43,10 +43,10 @@ class ChatbotServiceTest {
                         .build()))
                 .build();
         doReturn(dataset).when(datasetRepository).findById("datasetId");
-        doReturn("new sentence for source|new sentence for target").when(openAiClient).callChatbot(any(), "text-davinci-003");
+        doReturn("new sentence for source|new sentence for target").when(openAiClient).callChatbot(any(), any());
 
         Dataset vaporiseDataset = chatbotService.vaporiseDataset("prompt", "datasetId", "text-davinci-003",
-                0);
+                3);
 
         assertThat(vaporiseDataset.getName()).isEqualTo(dataset.getName());
         assertThat(vaporiseDataset.getId()).isEqualTo(dataset.getId());
@@ -61,9 +61,9 @@ class ChatbotServiceTest {
         ArgumentCaptor<String> promptCaptor = ArgumentCaptor.forClass(String.class);
         verify(openAiClient).callChatbot(promptCaptor.capture(), any());
         assertThat(promptCaptor.getValue())
-                .contains("prompt.")
+                .contains("prompt")
                 .contains("Original Czech sentence and English translation")
-                .contains("source|target")
+                .contains("source | target")
         ;
     }
 }

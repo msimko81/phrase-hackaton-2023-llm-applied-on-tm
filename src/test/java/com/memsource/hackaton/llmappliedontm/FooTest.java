@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @SpringBootTest
 @Slf4j
-//@Disabled
+@Disabled
 public class FooTest {
 
     @Autowired

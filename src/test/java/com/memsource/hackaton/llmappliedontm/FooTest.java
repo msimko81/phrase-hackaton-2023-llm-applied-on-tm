@@ -5,6 +5,7 @@ import com.memsource.hackaton.llmappliedontm.infrastructure.openai.ChatbotServic
 import com.theokanning.openai.completion.CompletionRequest;
 import com.theokanning.openai.model.Model;
 import com.theokanning.openai.service.OpenAiService;
+import com.memsource.hackaton.llmappliedontm.infrastructure.openai.OpenAiProxy;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -20,22 +21,21 @@ import java.util.stream.Collectors;
 public class FooTest {
 
     @Autowired
-    OpenAiService openAiService;
-
+    OpenAiProxy openAiProxy;
     @Autowired
     private ChatbotService chatbotService;
 
     @Test
     void bar() {
-        List<Model> models = openAiService.listModels();
-        log.info("{}", models);
+        String prompt = """
+                Rewrite the following in a gender neutral way. The text contains English sentence followed by Slovak translation (divided by the pipe). Each such block starts with a new line and with a dash. Rewrite both parts using the respective language.
 
-        CompletionRequest completionRequest = CompletionRequest.builder()
-                .prompt("Replace miro by petr in the following text: hello miro")
-                .model("davinci")
-                .echo(true)
-                .build();
-        openAiService.createCompletion(completionRequest).getChoices().forEach(System.out::println);
+                - He is a doctor.|On je lekár.
+                - She is an actress.|Je herečka.
+                - His mother and father lives abroad.|Jeho matka a otec žijú v zahraničí.
+                                        """;
+
+        System.out.println(openAiProxy.requestCompletion(prompt));
     }
 
     @Test

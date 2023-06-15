@@ -10,3 +10,5 @@ management:
 # Open AI
 open-ai:
   api-key: ${OPENAI_SECRET_API_KEY}
+  model: text-davinci-003
+  max-tokens: 1024

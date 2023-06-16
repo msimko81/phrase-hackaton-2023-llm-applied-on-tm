@@ -61,7 +61,7 @@ class ChatbotServiceTest {
         ArgumentCaptor<String> promptCaptor = ArgumentCaptor.forClass(String.class);
         verify(openAiClient).callChatbot(promptCaptor.capture(), any());
         assertThat(promptCaptor.getValue())
-                .contains("prompt")
+                .contains("prompt.")
                 .contains("Original Czech sentence and English translation")
                 .contains("source | target")
         ;

@@ -26,7 +26,7 @@ public class ChatbotService {
     public Dataset vaporiseDataset(String promptType, String datasetId, String model,
             int promptFormatNumber) {
         Dataset dataset = datasetRepository.findById(datasetId);
-        String finalPrompt = formatPrompt(promptType, dataset, promptFormatNumber);
+        String finalPrompt = formatPrompt(promptType.trim(), dataset, promptFormatNumber);
 
         String result = openAiClient.callChatbot(finalPrompt, model);
         List<Segment> segments = createSegmentsFromResponse(result);
@@ -64,6 +64,11 @@ public class ChatbotService {
 
         String sourceLanguage = getLanguageLongForm(dataset.getSourceLanguage());
         String targetLanguage = getLanguageLongForm(dataset.getTargetLanguage());
+
+        if (promptFormatNumber != 3 && promptType.charAt(promptType.length()-1) != '.') {
+            promptType += ".";
+        }
+
         return MessageFormat.format(promptFormat, promptType, sourceLanguage, targetLanguage, segments);
     }
 
